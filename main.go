@@ -28,4 +28,13 @@ func main() {
 		return true
 	})
 
+	<-time.After(5 * time.Millisecond)
+	fmt.Println("-------------------------------------------------------")
+
+	m.Delete("key 5")
+
+	m.Range(func(key interface{}, value interface{}) bool {
+		fmt.Printf("key: %v(Type: %T) -> Value: %v(Type: %T\n", key, key, value, value)
+		return true
+	})
 }
