@@ -15,6 +15,11 @@ func main() {
 	m.Store("key 4", "value 4")
 	m.Store("key 5", "value 5")
 
+	LOS, ok := m.Load("key5")
+	if ok {
+		fmt.Printf("value: %v(Type: %T\n", LOS, LOS)
+	}
+
 	LOS1, ok := m.LoadOrStore("key 6", "value 6")
 	if ok {
 		fmt.Printf("key 6: %v \n", LOS1)
