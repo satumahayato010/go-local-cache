@@ -9,6 +9,19 @@ import (
 func main() {
 	m := sync.Map{}
 
+	for i := 0; i < 1000; i++ {
+		go func(i int) {
+			m.Store(i, i)
+			<-time.After(5 * time.Millisecond)
+		}(i)
+	}
+
+	<-time.After(1000 * time.Millisecond)
+	m.Range(func(key interface{}, value interface{}) bool {
+		fmt.Printf("key: %vType: %T -> Value: %vType: %T\n", key, key, value, value)
+		return true
+	})
+
 	m.Store("key 1", "value 1")
 	m.Store("key 2", "value 2")
 	m.Store("key 3", "value 3")
